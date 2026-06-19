@@ -109,28 +109,34 @@
 
     /* ── CD Message ── */
     .cd-card { background: #fff; border-radius: 12px; border: 1px solid #E4E4E4; padding: 22px 24px 20px; }
-    .cd-subtitle { font-size: 13px; color: #999; margin-bottom: 14px; line-height: 1.5; }
+    /* Read-only display (visible to everyone) */
+    .cd-message-display { font-size: 15px; line-height: 1.75; color: #222; white-space: pre-line; min-height: 40px; }
+    .cd-message-empty { font-size: 14px; color: #ccc; font-style: italic; }
+    .cd-display-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 12px; border-top: 1px solid #F4F4F4; }
+    .cd-edit-hint { font-size: 11px; color: #ccc; letter-spacing: 0.3px; }
+    /* Inline unlock row (shown when Edit is clicked) */
+    .cd-unlock-row { display: none; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+    .cd-unlock-row.visible { display: flex; }
+    .cd-pin-input { border: 1px solid #DCDCDC; border-radius: 8px; padding: 7px 12px; font-size: 13px; font-family: inherit; outline: none; transition: border-color 0.15s; width: 160px; }
+    .cd-pin-input:focus { border-color: #CC0000; }
+    .cd-pin-input.shake { animation: shake 0.35s ease; border-color: #CC0000; }
+    .btn-unlock { background: #CC0000; color: #fff; border: none; border-radius: 8px; padding: 7px 16px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; }
+    .btn-unlock:hover { background: #A80000; }
+    .btn-edit { background: none; border: 1px solid #ddd; border-radius: 8px; padding: 5px 14px; font-size: 12px; font-weight: 600; color: #888; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+    .btn-edit:hover { border-color: #CC0000; color: #CC0000; }
+    .cd-lock-error { font-size: 12px; color: #CC0000; width: 100%; margin-top: 2px; }
+    /* Edit mode */
+    .cd-edit-mode { display: none; margin-top: 14px; }
+    .cd-edit-mode.visible { display: block; }
     .cd-textarea { width: 100%; min-height: 120px; border: 1px solid #DCDCDC; border-radius: 8px; padding: 12px 14px; font-size: 14px; font-family: inherit; color: #1A1A1A; line-height: 1.65; resize: vertical; outline: none; transition: border-color 0.15s; }
     .cd-textarea:focus { border-color: #CC0000; }
     .cd-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
     .save-status { font-size: 12px; color: #bbb; }
     .save-status.saved { color: #22A861; font-weight: 600; }
+    .cd-edit-btns { display: flex; gap: 10px; align-items: center; }
     .btn-save { background: #CC0000; color: #fff; border: none; border-radius: 8px; padding: 9px 22px; font-size: 14px; font-weight: 600; font-family: inherit; cursor: pointer; transition: background 0.15s; }
     .btn-save:hover  { background: #A80000; }
-    .btn-save:active { background: #8C0000; }
-
-    /* ── CD Lock ── */
-    .cd-locked { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 8px 0 4px; }
-    .cd-lock-icon { font-size: 28px; color: #ccc; }
-    .cd-lock-label { font-size: 13px; color: #999; }
-    .cd-lock-row { display: flex; gap: 8px; width: 100%; max-width: 320px; }
-    .cd-pin-input { flex: 1; border: 1px solid #DCDCDC; border-radius: 8px; padding: 9px 14px; font-size: 14px; font-family: inherit; outline: none; transition: border-color 0.15s; }
-    .cd-pin-input:focus { border-color: #CC0000; }
-    .cd-pin-input.shake { animation: shake 0.35s ease; border-color: #CC0000; }
-    .btn-unlock { background: #CC0000; color: #fff; border: none; border-radius: 8px; padding: 9px 18px; font-size: 14px; font-weight: 600; font-family: inherit; cursor: pointer; white-space: nowrap; }
-    .btn-unlock:hover { background: #A80000; }
-    .cd-lock-error { font-size: 12px; color: #CC0000; min-height: 16px; }
-    .btn-lock { background: none; border: none; font-size: 12px; color: #bbb; cursor: pointer; padding: 0; text-decoration: underline; }
+    .btn-lock { background: none; border: none; font-size: 12px; color: #bbb; cursor: pointer; padding: 0; text-decoration: underline; font-family: inherit; }
     .btn-lock:hover { color: #888; }
     @keyframes shake {
       0%,100% { transform: translateX(0); }
@@ -243,28 +249,31 @@
     <!-- ══ CD MESSAGE ══ -->
     <p class="section-label">Message from Your Clinic Director</p>
     <div class="cd-card">
-      <!-- Locked state -->
-      <div class="cd-locked" id="cdLocked">
-        <div class="cd-lock-icon">🔒</div>
-        <div class="cd-lock-label">Clinic Directors only — enter your password to edit</div>
-        <div class="cd-lock-row">
-          <input type="password" class="cd-pin-input" id="cdPinInput" placeholder="Password"
+      <!-- Message display — always visible to everyone -->
+      <div id="cdDisplay">
+        <div class="cd-message-display" id="cdMessageDisplay">
+          <span class="cd-message-empty">Your clinic director hasn't posted a message yet this week.</span>
+        </div>
+        <div class="cd-display-footer">
+          <span class="cd-edit-hint">🔒 Clinic Directors: click Edit to add your message</span>
+          <button class="btn-edit" onclick="showUnlockRow()">Edit</button>
+        </div>
+        <!-- Inline unlock row — shown when Edit is clicked -->
+        <div class="cd-unlock-row" id="cdUnlockRow">
+          <input type="password" class="cd-pin-input" id="cdPinInput" placeholder="CD password"
             onkeydown="if(event.key==='Enter') unlockCD()">
           <button class="btn-unlock" onclick="unlockCD()">Unlock</button>
+          <div class="cd-lock-error" id="cdLockError"></div>
         </div>
-        <div class="cd-lock-error" id="cdLockError"></div>
       </div>
-      <!-- Unlocked state -->
-      <div id="cdUnlocked" style="display:none">
-        <p class="cd-subtitle">
-          Add shoutouts, announcements, and coaching notes for your team. Saves to your browser — loads automatically next time this page opens.
-        </p>
+      <!-- Edit mode — shown only after correct password -->
+      <div class="cd-edit-mode" id="cdEditMode">
         <textarea class="cd-textarea" id="cdMessage"
           placeholder="e.g. Shoutout to [name] for a great week! Reminder about [upcoming event]. This week's focus: [coaching point]..."></textarea>
         <div class="cd-actions">
           <span class="save-status" id="saveStatus">No saved message yet</span>
-          <div style="display:flex;gap:12px;align-items:center">
-            <button class="btn-lock" onclick="lockCD()">Lock</button>
+          <div class="cd-edit-btns">
+            <button class="btn-lock" onclick="lockCD()">Done editing</button>
             <button class="btn-save" onclick="saveMessage()">Save Message</button>
           </div>
         </div>
@@ -289,48 +298,71 @@
     const params = new URLSearchParams(window.location.search);
     const CLINIC = params.get('clinic') || 'Shawnee';
 
-    // ── CD Message (localStorage, per clinic) ──
+    // ── CD Message ──
     const CD_KEY      = 'fit_cd_' + CLINIC.toLowerCase().replace(/\s+/g, '_');
     const CD_AUTH_KEY = 'fit_cd_auth';
     const CD_PASSWORD = 'WinTheWeek';
+
+    function refreshDisplay() {
+      const saved = localStorage.getItem(CD_KEY);
+      const display = document.getElementById('cdMessageDisplay');
+      if (saved && saved.trim()) {
+        display.innerHTML = '';
+        display.textContent = saved;
+      } else {
+        display.innerHTML = '<span class=\"cd-message-empty\">Your clinic director hasn\'t posted a message yet this week.</span>';
+      }
+    }
+
+    function showUnlockRow() {
+      document.getElementById('cdUnlockRow').classList.add('visible');
+      document.getElementById('cdPinInput').focus();
+    }
 
     function unlockCD() {
       const input = document.getElementById('cdPinInput');
       const errorEl = document.getElementById('cdLockError');
       if (input.value === CD_PASSWORD) {
         localStorage.setItem(CD_AUTH_KEY, '1');
-        showUnlocked();
+        showEditMode();
       } else {
-        errorEl.textContent = 'Incorrect password — try again.';
+        errorEl.textContent = 'Incorrect password.';
         input.classList.add('shake');
         input.value = '';
-        setTimeout(() => input.classList.remove('shake'), 400);
+        setTimeout(() => { input.classList.remove('shake'); }, 400);
       }
     }
 
-    function lockCD() {
-      localStorage.removeItem(CD_AUTH_KEY);
-      document.getElementById('cdLocked').style.display = 'flex';
-      document.getElementById('cdUnlocked').style.display = 'none';
-      document.getElementById('cdPinInput').value = '';
-      document.getElementById('cdLockError').textContent = '';
-    }
-
-    function showUnlocked() {
-      document.getElementById('cdLocked').style.display = 'none';
-      document.getElementById('cdUnlocked').style.display = 'block';
+    function showEditMode() {
+      // Hide the display panel, show the edit panel
+      document.getElementById('cdDisplay').style.display = 'none';
+      const editMode = document.getElementById('cdEditMode');
+      editMode.classList.add('visible');
       const textarea = document.getElementById('cdMessage');
       const statusEl = document.getElementById('saveStatus');
-      const savedMsg = localStorage.getItem(CD_KEY);
-      if (savedMsg) {
-        textarea.value = savedMsg;
+      const saved = localStorage.getItem(CD_KEY);
+      if (saved) {
+        textarea.value = saved;
         statusEl.textContent = 'Saved message loaded ✓';
         statusEl.classList.add('saved');
       }
-      textarea.addEventListener('input', () => {
+      textarea.oninput = () => {
         statusEl.textContent = 'Unsaved changes';
         statusEl.classList.remove('saved');
-      });
+      };
+      textarea.focus();
+    }
+
+    function lockCD() {
+      // Save whatever's there, then return to display mode
+      saveMessage();
+      localStorage.removeItem(CD_AUTH_KEY);
+      document.getElementById('cdDisplay').style.display = 'block';
+      document.getElementById('cdEditMode').classList.remove('visible');
+      document.getElementById('cdUnlockRow').classList.remove('visible');
+      document.getElementById('cdPinInput').value = '';
+      document.getElementById('cdLockError').textContent = '';
+      refreshDisplay();
     }
 
     function saveMessage() {
@@ -341,9 +373,10 @@
       statusEl.classList.add('saved');
     }
 
-    // Auto-unlock if already authenticated on this device
+    // On load: show the saved message (if any), auto-enter edit mode if already authenticated
+    refreshDisplay();
     if (localStorage.getItem(CD_AUTH_KEY) === '1') {
-      showUnlocked();
+      showEditMode();
     }
 
     // ── Badge helpers ──
