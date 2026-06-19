@@ -119,6 +119,27 @@
     .btn-save:hover  { background: #A80000; }
     .btn-save:active { background: #8C0000; }
 
+    /* ── CD Lock ── */
+    .cd-locked { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 8px 0 4px; }
+    .cd-lock-icon { font-size: 28px; color: #ccc; }
+    .cd-lock-label { font-size: 13px; color: #999; }
+    .cd-lock-row { display: flex; gap: 8px; width: 100%; max-width: 320px; }
+    .cd-pin-input { flex: 1; border: 1px solid #DCDCDC; border-radius: 8px; padding: 9px 14px; font-size: 14px; font-family: inherit; outline: none; transition: border-color 0.15s; }
+    .cd-pin-input:focus { border-color: #CC0000; }
+    .cd-pin-input.shake { animation: shake 0.35s ease; border-color: #CC0000; }
+    .btn-unlock { background: #CC0000; color: #fff; border: none; border-radius: 8px; padding: 9px 18px; font-size: 14px; font-weight: 600; font-family: inherit; cursor: pointer; white-space: nowrap; }
+    .btn-unlock:hover { background: #A80000; }
+    .cd-lock-error { font-size: 12px; color: #CC0000; min-height: 16px; }
+    .btn-lock { background: none; border: none; font-size: 12px; color: #bbb; cursor: pointer; padding: 0; text-decoration: underline; }
+    .btn-lock:hover { color: #888; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%      { transform: translateX(-6px); }
+      40%      { transform: translateX(6px); }
+      60%      { transform: translateX(-4px); }
+      80%      { transform: translateX(4px); }
+    }
+
     /* ── Important Information ── */
     .updates-card { background: #fff; border-radius: 12px; border: 1px solid #E4E4E4; overflow: hidden; }
     .update-item { padding: 18px 24px; border-bottom: 1px solid #F0F0F0; }
@@ -222,14 +243,31 @@
     <!-- ══ CD MESSAGE ══ -->
     <p class="section-label">Message from Your Clinic Director</p>
     <div class="cd-card">
-      <p class="cd-subtitle">
-        Add shoutouts, announcements, and coaching notes for your team. Saves to your browser — loads automatically next time this page opens.
-      </p>
-      <textarea class="cd-textarea" id="cdMessage"
-        placeholder="e.g. Shoutout to [name] for a great week! Reminder about [upcoming event]. This week's focus: [coaching point]..."></textarea>
-      <div class="cd-actions">
-        <span class="save-status" id="saveStatus">No saved message yet</span>
-        <button class="btn-save" onclick="saveMessage()">Save Message</button>
+      <!-- Locked state -->
+      <div class="cd-locked" id="cdLocked">
+        <div class="cd-lock-icon">🔒</div>
+        <div class="cd-lock-label">Clinic Directors only — enter your password to edit</div>
+        <div class="cd-lock-row">
+          <input type="password" class="cd-pin-input" id="cdPinInput" placeholder="Password"
+            onkeydown="if(event.key==='Enter') unlockCD()">
+          <button class="btn-unlock" onclick="unlockCD()">Unlock</button>
+        </div>
+        <div class="cd-lock-error" id="cdLockError"></div>
+      </div>
+      <!-- Unlocked state -->
+      <div id="cdUnlocked" style="display:none">
+        <p class="cd-subtitle">
+          Add shoutouts, announcements, and coaching notes for your team. Saves to your browser — loads automatically next time this page opens.
+        </p>
+        <textarea class="cd-textarea" id="cdMessage"
+          placeholder="e.g. Shoutout to [name] for a great week! Reminder about [upcoming event]. This week's focus: [coaching point]..."></textarea>
+        <div class="cd-actions">
+          <span class="save-status" id="saveStatus">No saved message yet</span>
+          <div style="display:flex;gap:12px;align-items:center">
+            <button class="btn-lock" onclick="lockCD()">Lock</button>
+            <button class="btn-save" onclick="saveMessage()">Save Message</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -252,23 +290,60 @@
     const CLINIC = params.get('clinic') || 'Shawnee';
 
     // ── CD Message (localStorage, per clinic) ──
-    const CD_KEY = 'fit_cd_' + CLINIC.toLowerCase().replace(/\s+/g, '_');
-    const textarea = document.getElementById('cdMessage');
-    const statusEl = document.getElementById('saveStatus');
-    const savedMsg = localStorage.getItem(CD_KEY);
-    if (savedMsg) {
-      textarea.value = savedMsg;
-      statusEl.textContent = 'Saved message loaded ✓';
-      statusEl.classList.add('saved');
+    const CD_KEY      = 'fit_cd_' + CLINIC.toLowerCase().replace(/\s+/g, '_');
+    const CD_AUTH_KEY = 'fit_cd_auth';
+    const CD_PASSWORD = 'WinTheWeek';
+
+    function unlockCD() {
+      const input = document.getElementById('cdPinInput');
+      const errorEl = document.getElementById('cdLockError');
+      if (input.value === CD_PASSWORD) {
+        localStorage.setItem(CD_AUTH_KEY, '1');
+        showUnlocked();
+      } else {
+        errorEl.textContent = 'Incorrect password — try again.';
+        input.classList.add('shake');
+        input.value = '';
+        setTimeout(() => input.classList.remove('shake'), 400);
+      }
     }
-    textarea.addEventListener('input', () => {
-      statusEl.textContent = 'Unsaved changes';
-      statusEl.classList.remove('saved');
-    });
+
+    function lockCD() {
+      localStorage.removeItem(CD_AUTH_KEY);
+      document.getElementById('cdLocked').style.display = 'flex';
+      document.getElementById('cdUnlocked').style.display = 'none';
+      document.getElementById('cdPinInput').value = '';
+      document.getElementById('cdLockError').textContent = '';
+    }
+
+    function showUnlocked() {
+      document.getElementById('cdLocked').style.display = 'none';
+      document.getElementById('cdUnlocked').style.display = 'block';
+      const textarea = document.getElementById('cdMessage');
+      const statusEl = document.getElementById('saveStatus');
+      const savedMsg = localStorage.getItem(CD_KEY);
+      if (savedMsg) {
+        textarea.value = savedMsg;
+        statusEl.textContent = 'Saved message loaded ✓';
+        statusEl.classList.add('saved');
+      }
+      textarea.addEventListener('input', () => {
+        statusEl.textContent = 'Unsaved changes';
+        statusEl.classList.remove('saved');
+      });
+    }
+
     function saveMessage() {
+      const textarea = document.getElementById('cdMessage');
+      const statusEl = document.getElementById('saveStatus');
       localStorage.setItem(CD_KEY, textarea.value);
       statusEl.textContent = 'Saved ✓';
       statusEl.classList.add('saved');
+    }
+
+    // Auto-unlock if already authenticated on this device
+    if (localStorage.getItem(CD_AUTH_KEY) === '1') {
+      showUnlocked();
     }
 
     // ── Badge helpers ──
