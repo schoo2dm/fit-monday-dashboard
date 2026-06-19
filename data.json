@@ -1,0 +1,200 @@
+{
+  "weekLabel": "Jun 9 – Jun 13, 2026",
+  "generatedAt": "2026-06-19T19:04:46.787Z",
+  "clinics": {
+    "Blue Valley": {
+      "arrived": 224,
+      "goal": 254,
+      "scheduled": 259,
+      "cancels": 35,
+      "cancelRate": 13.51,
+      "nps": 11
+    },
+    "Crossroads": {
+      "arrived": 142,
+      "goal": 210,
+      "scheduled": 175,
+      "cancels": 33,
+      "cancelRate": 18.86,
+      "nps": 8
+    },
+    "Iowa": {
+      "arrived": 21,
+      "goal": null,
+      "scheduled": 23,
+      "cancels": 2,
+      "cancelRate": 8.7,
+      "nps": 1
+    },
+    "KCK": {
+      "arrived": 52,
+      "goal": 65,
+      "scheduled": 63,
+      "cancels": 11,
+      "cancelRate": 17.46,
+      "nps": 5
+    },
+    "Leawood": {
+      "arrived": 458,
+      "goal": 424,
+      "scheduled": 512,
+      "cancels": 54,
+      "cancelRate": 10.55,
+      "nps": 19
+    },
+    "Lees Summit": {
+      "arrived": 289,
+      "goal": 353,
+      "scheduled": 337,
+      "cancels": 48,
+      "cancelRate": 14.24,
+      "nps": 13
+    },
+    "Liberty": {
+      "arrived": 51,
+      "goal": 130,
+      "scheduled": 66,
+      "cancels": 11,
+      "cancelRate": 16.67,
+      "nps": 4
+    },
+    "Olathe": {
+      "arrived": 279,
+      "goal": 283,
+      "scheduled": 349,
+      "cancels": 59,
+      "cancelRate": 16.91,
+      "nps": 17
+    },
+    "Overland Park": {
+      "arrived": 116,
+      "goal": 190,
+      "scheduled": 140,
+      "cancels": 24,
+      "cancelRate": 17.14,
+      "nps": 6
+    },
+    "Paola": {
+      "arrived": 83,
+      "goal": 92,
+      "scheduled": 94,
+      "cancels": 11,
+      "cancelRate": 11.7,
+      "nps": 3
+    },
+    "Raymore": {
+      "arrived": 167,
+      "goal": 208,
+      "scheduled": 207,
+      "cancels": 40,
+      "cancelRate": 19.32,
+      "nps": 10
+    },
+    "Shawnee": {
+      "arrived": 360,
+      "goal": 395,
+      "scheduled": 407,
+      "cancels": 47,
+      "cancelRate": 11.55,
+      "nps": 18
+    }
+  },
+  "companyTotals": {
+    "arrived": 2242,
+    "nps": 115,
+    "cancelRate": 14.68,
+    "goalTotal": 2604
+  },
+  "importantInfo": [
+    {
+      "id": "1",
+      "title": "Existing Patient Evaluation Tracking",
+      "body": "Soon we'll start tracking scheduling-out scores for re-evals (EP - Initial Evaluation appt type). Please treat re-evals like new patients — educate on tissue healing times, set expectations for a 4–6 week treatment plan, and let them know you are the quarterback of their care."
+    },
+    {
+      "id": "2",
+      "title": "Flex Schedule Criteria Perk Updates",
+      "body": "Providers may now flex their schedule during a PTO week if they maintain a current YTD average of 50+ treatments per week. Refer to the flex schedule manual for the full explanation of the perk."
+    },
+    {
+      "id": "3",
+      "title": "Changes for Part-Time Teammates",
+      "body": "The bonus threshold for part-time teammates is now 70% (previously 75%). Reminder: part-time = fewer than 35 clinic hours/week. Benefits eligibility requires at least 30 clinic hours/week."
+    },
+    {
+      "id": "4",
+      "title": "Communicate 1-Offs for Schedule-Out Tracking",
+      "body": "If a new patient couldn't schedule out for a legitimate reason, email Ryan Macan at ryan@fitmjc.com. Without that communication, it shows as a missed schedule-out.\n\nLegitimate reasons include:\n• Patient not local / just visiting KC\n• A red flag or emergency requiring an ER referral"
+    },
+    {
+      "id": "5",
+      "title": "Marketing Team Needs CE Contacts",
+      "body": "Krista, Winnie, and Peyton are building community contacts near each clinic. If a patient works somewhere that could benefit from our services, get the HR rep's contact info."
+    },
+    {
+      "id": "6",
+      "title": "New Ash, Oscar, and Optum Authorization SOPs",
+      "body": "New SOPs are now available for Ash (Cigna), Oscar, and Optum/UHC authorizations. See the links provided by your clinic director for each SOP document."
+    },
+    {
+      "id": "7",
+      "title": "Patient Re-Engagement Campaign",
+      "body": "Your re-engagement campaign spreadsheet should be complete. If it isn't, get it done ASAP. Be on the lookout for a follow-up email from your CD with next steps."
+    },
+    {
+      "id": "8",
+      "title": "Update on Sports Medicine Team",
+      "body": "Matt Dobratz is building F.I.T.'s sports medicine team and finishing the curriculum. Interested in joining? Reach out to him at matthew@fitmjc.com."
+    },
+    {
+      "id": "9",
+      "title": "New Personal Appointment Types / Colors",
+      "body": "Prompt 10.0 now supports color coding for schedule blocks.\n\nLunch Break → Pink\nNP Access Blocks → Green\nMonthly Check-in / Meeting / Yearly Review → Turquoise\nCE Block → Yellow\nL10 Meeting → Khaki"
+    },
+    {
+      "id": "10",
+      "title": "Community Partners",
+      "body": "Not everyone knows who their community partners are. The full list is on SharePoint. Reach out to any partner you haven't heard from recently and set up a CE event!"
+    },
+    {
+      "id": "11",
+      "title": "Building and Maintaining a Full Schedule",
+      "body": "If your visit count was below your weekly average, reflect on:\n\n• If you were out, how can we better ensure your patients stay on track?\n• If patients were traveling, how can we anticipate those gaps?"
+    },
+    {
+      "id": "12",
+      "title": "Case Overview Dashboard — Old Patients",
+      "body": "Use the Case Overview Dashboard weekly to go through open cases, reach out to patients who haven't been in, update treatment plans, or discharge inactive cases.\n\nhttps://support.promptemr.com/article/704-the-active-cases-dashboard-tool"
+    },
+    {
+      "id": "13",
+      "title": "Next Events",
+      "body": "• October 24–25: ICE: Extremity Management\n• Check your corporate challenge event dates and plan ahead!"
+    },
+    {
+      "id": "14",
+      "title": "PCC / Admin Reminders",
+      "body": "• Dashboard: Review Eligibility, Intake Conflicts, and Benefits Verification\n• Demographics: Gender is required — ensure it's filled out for all patients\n• Referring Providers: Must be entered on each Case for Plan of Care and Medicare processing"
+    },
+    {
+      "id": "15",
+      "title": "POC",
+      "body": "If a new patient cancels or no-call no-shows, please email referrals."
+    },
+    {
+      "id": "16",
+      "title": "Provider Daily Rocks",
+      "body": "Use your downtime wisely — every provider has 3 daily rocks:\n\n1. Deliver exceptional one-on-one care\n2. Build trusting relationships via community engagement\n3. Complete billing & documentation in a timely manner"
+    },
+    {
+      "id": "17",
+      "title": "Patient Experience Tip",
+      "body": "If your treatment table is ripping or has holes, contact Dilyn to coordinate reupholstering."
+    },
+    {
+      "id": "18",
+      "title": "Weekly Wrap-Up Scorecard",
+      "body": "Tracking 2026: [link will be added]"
+    }
+  ]
+}
