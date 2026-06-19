@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Weekly Briefing | F.I.T. MJC</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #F2F2F2;
+      color: #1A1A1A;
+      min-height: 100vh;
+    }
+
+    /* ── Loading / Error ── */
+    .loading-screen {
+      position: fixed; inset: 0;
+      background: #0F0F0F;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 999;
+    }
+    .loading-logo { font-size: 36px; font-weight: 900; color: #CC0000; letter-spacing: 4px; }
+    .loading-text { font-size: 14px; color: rgba(255,255,255,0.45); letter-spacing: 1px; }
+    .loading-screen.hidden { display: none; }
+
+    /* ── Header ── */
+    .header {
+      background: #0F0F0F;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      border-bottom: 3px solid #CC0000;
+    }
+    .header-logo-area { display: flex; align-items: center; gap: 16px; }
+    .logo-img { height: 44px; width: auto; display: block; }
+    .logo-placeholder { display: flex; flex-direction: column; line-height: 1.1; }
+    .logo-fit { font-size: 24px; font-weight: 900; color: #CC0000; letter-spacing: 3px; }
+    .logo-sub { font-size: 9px; font-weight: 600; color: #FFFFFF; letter-spacing: 3px; text-transform: uppercase; opacity: 0.75; }
+    .header-divider { width: 1px; height: 36px; background: rgba(255,255,255,0.2); }
+    .header-clinic-info { display: flex; flex-direction: column; gap: 2px; }
+    .header-clinic-name { font-size: 20px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.3px; }
+    .header-clinic-label { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; }
+    .header-week { text-align: right; }
+    .header-week-greeting { font-size: 14px; font-weight: 700; color: #CC0000; }
+    .header-week-date { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+    /* ── Page ── */
+    .page { max-width: 900px; margin: 0 auto; padding: 32px 20px 72px; }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #999;
+      margin-bottom: 12px; margin-top: 28px;
+    }
+    .section-label:first-child { margin-top: 0; }
+
+    /* ── KPI Grid ── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 600px) { .kpi-grid { grid-template-columns: 1fr; } }
+
+    .kpi-card { background: #fff; border-radius: 12px; padding: 20px 18px 16px; border: 1px solid #E4E4E4; }
+    .kpi-label { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; color: #999; text-transform: uppercase; margin-bottom: 8px; }
+    .kpi-value { font-size: 42px; font-weight: 800; line-height: 1; color: #0F0F0F; margin-bottom: 4px; }
+    .kpi-goal-line { font-size: 13px; color: #aaa; margin-bottom: 14px; }
+    .kpi-goal-line strong { color: #666; font-weight: 600; }
+
+    .progress-track { background: #F0F0F0; border-radius: 99px; height: 5px; overflow: hidden; margin-bottom: 10px; }
+    .progress-fill { height: 100%; border-radius: 99px; }
+    .fill-green  { background: #22A861; }
+    .fill-yellow { background: #E5A000; }
+    .fill-red    { background: #CC0000; }
+
+    .status-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 99px; }
+    .badge-green  { background: #E7F7EE; color: #1A7A47; }
+    .badge-yellow { background: #FFF8E6; color: #9A6B00; }
+    .badge-red    { background: #FDECEA; color: #A30000; }
+
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .dot-green  { background: #22A861; }
+    .dot-yellow { background: #E5A000; }
+    .dot-red    { background: #CC0000; }
+
+    .kpi-note { font-size: 11px; color: #bbb; margin-top: 7px; }
+
+    /* ── Company Snapshot ── */
+    .company-bar {
+      background: #0F0F0F; border-radius: 12px; padding: 16px 22px;
+      display: flex; align-items: center; flex-wrap: wrap;
+    }
+    .company-stat { flex: 1; min-width: 140px; padding: 4px 20px; border-right: 1px solid rgba(255,255,255,0.1); }
+    .company-stat:first-child { padding-left: 0; }
+    .company-stat:last-child { border-right: none; }
+    .company-stat-label { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px; }
+    .company-stat-value { font-size: 20px; font-weight: 800; color: #FFFFFF; line-height: 1; }
+    .company-stat-sub { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+    .company-stat-pct { font-size: 12px; font-weight: 600; margin-top: 2px; }
+    .pct-yellow { color: #E5A000; }
+    .pct-green  { color: #22A861; }
+    .pct-red    { color: #FF6B6B; }
+
+    /* ── CD Message ── */
+    .cd-card { background: #fff; border-radius: 12px; border: 1px solid #E4E4E4; padding: 22px 24px 20px; }
+    .cd-subtitle { font-size: 13px; color: #999; margin-bottom: 14px; line-height: 1.5; }
+    .cd-textarea { width: 100%; min-height: 120px; border: 1px solid #DCDCDC; border-radius: 8px; padding: 12px 14px; font-size: 14px; font-family: inherit; color: #1A1A1A; line-height: 1.65; resize: vertical; outline: none; transition: border-color 0.15s; }
+    .cd-textarea:focus { border-color: #CC0000; }
+    .cd-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
+    .save-status { font-size: 12px; color: #bbb; }
+    .save-status.saved { color: #22A861; font-weight: 600; }
+    .btn-save { background: #CC0000; color: #fff; border: none; border-radius: 8px; padding: 9px 22px; font-size: 14px; font-weight: 600; font-family: inherit; cursor: pointer; transition: background 0.15s; }
+    .btn-save:hover  { background: #A80000; }
+    .btn-save:active { background: #8C0000; }
+
+    /* ── Important Information ── */
+    .updates-card { background: #fff; border-radius: 12px; border: 1px solid #E4E4E4; overflow: hidden; }
+    .update-item { padding: 18px 24px; border-bottom: 1px solid #F0F0F0; }
+    .update-item:last-child { border-bottom: none; }
+    .update-title { font-size: 14px; font-weight: 700; color: #0F0F0F; margin-bottom: 6px; }
+    .update-body { font-size: 14px; line-height: 1.65; color: #444; white-space: pre-line; }
+    .update-body a { color: #CC0000; text-decoration: none; }
+    .update-body a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    .footer { margin-top: 48px; text-align: center; font-size: 12px; color: #C0C0C0; }
+    .footer strong { color: #CC0000; }
+    .footer-generated { font-size: 11px; color: #DEDEDE; margin-top: 4px; }
+  </style>
+</head>
+<body>
+
+  <!-- Loading screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo">F.I.T.</div>
+    <div class="loading-text">Loading your briefing...</div>
+  </div>
+
+  <!-- ══ HEADER ══ -->
+  <header class="header">
+    <div class="header-logo-area">
+      <img src="FIT Wide Logo.png" alt="F.I.T. Muscle &amp; Joint Clinic" class="logo-img"
+           onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex'">
+      <div class="logo-placeholder" id="logoFallback" style="display:none">
+        <span class="logo-fit">F.I.T.</span>
+        <span class="logo-sub">Muscle &amp; Joint</span>
+      </div>
+      <div class="header-divider"></div>
+      <div class="header-clinic-info">
+        <div class="header-clinic-name" id="headerClinicName">—</div>
+        <div class="header-clinic-label">Weekly Briefing</div>
+      </div>
+    </div>
+    <div class="header-week">
+      <div class="header-week-greeting">Happy Monday! 🎉</div>
+      <div class="header-week-date" id="headerWeekDate">Loading...</div>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <!-- ══ CLINIC KPIs ══ -->
+    <p class="section-label" id="sectionClinicLabel">— Last Week</p>
+    <div class="kpi-grid">
+
+      <div class="kpi-card">
+        <div class="kpi-label">Arrived Visits</div>
+        <div class="kpi-value" id="arrivedValue">—</div>
+        <div class="kpi-goal-line" id="arrivedGoalLine">—</div>
+        <div class="progress-track"><div class="progress-fill" id="arrivedBar" style="width:0%"></div></div>
+        <span class="status-badge" id="arrivedBadge"><span class="status-dot" id="arrivedDot"></span><span id="arrivedBadgeText">—</span></span>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">New Patients</div>
+        <div class="kpi-value" id="npValue">—</div>
+        <div class="kpi-goal-line" id="npRankLine">—</div>
+        <div class="progress-track"><div class="progress-fill" id="npBar" style="width:0%"></div></div>
+        <span class="status-badge" id="npBadge"><span class="status-dot" id="npDot"></span><span id="npBadgeText">—</span></span>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">Cancel Rate</div>
+        <div class="kpi-value" id="cancelValue">—</div>
+        <div class="kpi-goal-line" id="cancelSubLine">—</div>
+        <div class="progress-track"><div class="progress-fill" id="cancelBar" style="width:0%"></div></div>
+        <span class="status-badge" id="cancelBadge"><span class="status-dot" id="cancelDot"></span><span id="cancelBadgeText">—</span></span>
+        <div class="kpi-note">Lower is better</div>
+      </div>
+
+    </div>
+
+    <!-- ══ COMPANY SNAPSHOT ══ -->
+    <p class="section-label">F.I.T. Company — Last Week</p>
+    <div class="company-bar">
+      <div class="company-stat">
+        <div class="company-stat-label">Total Visits</div>
+        <div class="company-stat-value" id="companyVisits">—</div>
+        <div class="company-stat-sub" id="companyVisitsGoal">—</div>
+        <div class="company-stat-pct" id="companyVisitsPct">—</div>
+      </div>
+      <div class="company-stat">
+        <div class="company-stat-label">New Patients</div>
+        <div class="company-stat-value" id="companyNps">—</div>
+        <div class="company-stat-sub">12 clinics combined</div>
+        <div class="company-stat-pct" id="companyNpsAvg">—</div>
+      </div>
+      <div class="company-stat">
+        <div class="company-stat-label">Clinic Rank</div>
+        <div class="company-stat-value" id="clinicRank">—</div>
+        <div class="company-stat-sub">by arrived visits</div>
+        <div class="company-stat-pct" id="clinicRankNote">—</div>
+      </div>
+    </div>
+
+    <!-- ══ CD MESSAGE ══ -->
+    <p class="section-label">Message from Your Clinic Director</p>
+    <div class="cd-card">
+      <p class="cd-subtitle">
+        Add shoutouts, announcements, and coaching notes for your team. Saves to your browser — loads automatically next time this page opens.
+      </p>
+      <textarea class="cd-textarea" id="cdMessage"
+        placeholder="e.g. Shoutout to [name] for a great week! Reminder about [upcoming event]. This week's focus: [coaching point]..."></textarea>
+      <div class="cd-actions">
+        <span class="save-status" id="saveStatus">No saved message yet</span>
+        <button class="btn-save" onclick="saveMessage()">Save Message</button>
+      </div>
+    </div>
+
+    <!-- ══ IMPORTANT INFORMATION ══ -->
+    <p class="section-label">Important Information</p>
+    <div class="updates-card" id="updatesContainer">
+      <div class="update-item"><div class="update-body">Loading...</div></div>
+    </div>
+
+    <div class="footer">
+      <strong>F.I.T. Muscle &amp; Joint Clinic</strong> &nbsp;·&nbsp; Auto-generated Monday Briefing &nbsp;·&nbsp; Data: Prompt BI
+      <div class="footer-generated" id="footerGenerated"></div>
+    </div>
+
+  </main>
+
+  <script>
+    // ── Clinic from URL ──
+    const params = new URLSearchParams(window.location.search);
+    const CLINIC = params.get('clinic') || 'Shawnee';
+
+    // ── CD Message (localStorage, per clinic) ──
+    const CD_KEY = 'fit_cd_' + CLINIC.toLowerCase().replace(/\s+/g, '_');
+    const textarea = document.getElementById('cdMessage');
+    const statusEl = document.getElementById('saveStatus');
+    const savedMsg = localStorage.getItem(CD_KEY);
+    if (savedMsg) {
+      textarea.value = savedMsg;
+      statusEl.textContent = 'Saved message loaded ✓';
+      statusEl.classList.add('saved');
+    }
+    textarea.addEventListener('input', () => {
+      statusEl.textContent = 'Unsaved changes';
+      statusEl.classList.remove('saved');
+    });
+    function saveMessage() {
+      localStorage.setItem(CD_KEY, textarea.value);
+      statusEl.textContent = 'Saved ✓';
+      statusEl.classList.add('saved');
+    }
+
+    // ── Badge helpers ──
+    function visitColor(pct) {
+      if (pct >= 95) return 'green';
+      if (pct >= 80) return 'yellow';
+      return 'red';
+    }
+    function cancelColor(rate) {
+      if (rate < 12) return 'green';
+      if (rate <= 18) return 'yellow';
+      return 'red';
+    }
+    function applyColor(barEl, badgeEl, dotEl, color) {
+      barEl.className  = 'progress-fill fill-' + color;
+      badgeEl.className = 'status-badge badge-' + color;
+      dotEl.className   = 'status-dot dot-' + color;
+    }
+    function ordinal(n) {
+      const s = ['th','st','nd','rd'], v = n % 100;
+      return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    }
+    function autoLink(text) {
+      return text
+        .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>')
+        .replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, '<a href="mailto:$1">$1</a>');
+    }
+
+    // ── Render dashboard ──
+    function renderDashboard(data) {
+      const clinic = data.clinics[CLINIC];
+      if (!clinic) {
+        document.getElementById('loadingScreen').querySelector('.loading-text').textContent =
+          'Clinic "' + CLINIC + '" not found in data.';
+        return;
+      }
+
+      // Page title & header
+      document.getElementById('pageTitle').textContent = CLINIC + ' — Weekly Briefing | F.I.T. MJC';
+      document.getElementById('headerClinicName').textContent = CLINIC;
+      document.getElementById('headerWeekDate').textContent = 'Week of ' + data.weekLabel;
+      document.getElementById('sectionClinicLabel').textContent = CLINIC + ' — Last Week';
+
+      // ── Arrived Visits ──
+      const arrived = clinic.arrived;
+      const goal    = clinic.goal;
+      document.getElementById('arrivedValue').textContent = arrived.toLocaleString();
+
+      let arrivedPct = null;
+      if (goal) {
+        arrivedPct = Math.round(arrived / goal * 1000) / 10;
+        document.getElementById('arrivedGoalLine').innerHTML = 'Goal: <strong>' + goal.toLocaleString() + '</strong>';
+        const color = visitColor(arrivedPct);
+        applyColor(
+          document.getElementById('arrivedBar'),
+          document.getElementById('arrivedBadge'),
+          document.getElementById('arrivedDot'),
+          color
+        );
+        document.getElementById('arrivedBar').style.width = Math.min(arrivedPct, 100) + '%';
+        const label = arrivedPct >= 100
+          ? 'Goal met ✓'
+          : arrivedPct.toFixed(1) + '% of goal';
+        document.getElementById('arrivedBadgeText').textContent = label;
+      } else {
+        document.getElementById('arrivedGoalLine').textContent = 'No goal set for this clinic';
+        document.getElementById('arrivedBar').style.width = '60%';
+        document.getElementById('arrivedBar').className = 'progress-fill fill-yellow';
+        document.getElementById('arrivedBadgeText').textContent = 'No goal set';
+      }
+
+      // ── New Patients ──
+      const nps = clinic.nps;
+      document.getElementById('npValue').textContent = nps;
+
+      // NP rank
+      const npRanked = Object.entries(data.clinics)
+        .sort((a, b) => b[1].nps - a[1].nps);
+      const npRank = npRanked.findIndex(([name]) => name === CLINIC) + 1;
+      const totalClinics = npRanked.length;
+      document.getElementById('npRankLine').innerHTML =
+        'Ranked <strong>' + ordinal(npRank) + '</strong> of ' + totalClinics + ' clinics';
+
+      const npColor = npRank === 1 ? 'green' : npRank <= Math.ceil(totalClinics / 2) ? 'yellow' : 'red';
+      applyColor(
+        document.getElementById('npBar'),
+        document.getElementById('npBadge'),
+        document.getElementById('npDot'),
+        npColor
+      );
+      // Bar = relative to top clinic
+      const topNps = npRanked[0][1].nps;
+      document.getElementById('npBar').style.width = Math.round(nps / topNps * 100) + '%';
+      document.getElementById('npBadgeText').textContent = npRank === 1
+        ? 'Most NPs this week 🏆'
+        : ordinal(npRank) + ' in company';
+
+      // ── Cancel Rate ──
+      const cancelRate = clinic.cancelRate;
+      document.getElementById('cancelValue').textContent = cancelRate.toFixed(1) + '%';
+      document.getElementById('cancelSubLine').innerHTML =
+        clinic.cancels + ' of <strong>' + clinic.scheduled.toLocaleString() + '</strong> scheduled';
+
+      const cancelCol = cancelColor(cancelRate);
+      applyColor(
+        document.getElementById('cancelBar'),
+        document.getElementById('cancelBadge'),
+        document.getElementById('cancelDot'),
+        cancelCol
+      );
+      // Bar = inverse (lower cancel = more green bar)
+      const cancelBarPct = Math.max(0, Math.min(100, Math.round((1 - cancelRate / 20) * 100)));
+      document.getElementById('cancelBar').style.width = cancelBarPct + '%';
+      const cancelLabel = cancelCol === 'green'
+        ? 'Healthy (<12% target)'
+        : cancelCol === 'yellow'
+        ? 'Watch this (12–18%)'
+        : 'High — needs attention';
+      document.getElementById('cancelBadgeText').textContent = cancelLabel;
+
+      // ── Company Snapshot ──
+      const totals  = data.companyTotals;
+      const compPct = totals.goalTotal
+        ? Math.round(totals.arrived / totals.goalTotal * 10) / 10
+        : null;
+
+      document.getElementById('companyVisits').textContent = totals.arrived.toLocaleString();
+      document.getElementById('companyVisitsGoal').textContent = totals.goalTotal
+        ? 'Goal: ' + totals.goalTotal.toLocaleString() + '/wk'
+        : '—';
+      if (compPct !== null) {
+        const compEl = document.getElementById('companyVisitsPct');
+        compEl.textContent = compPct + '% of goal';
+        compEl.className = 'company-stat-pct ' + (compPct >= 95 ? 'pct-green' : compPct >= 80 ? 'pct-yellow' : 'pct-red');
+      }
+
+      document.getElementById('companyNps').textContent = totals.nps;
+      const avgNps = (totals.nps / totalClinics).toFixed(1);
+      document.getElementById('companyNpsAvg').textContent = avgNps + '/clinic avg';
+      document.getElementById('companyNpsAvg').className =
+        'company-stat-pct ' + (nps >= parseFloat(avgNps) ? 'pct-green' : 'pct-yellow');
+
+      // Clinic rank by arrived visits
+      const visitRanked = Object.entries(data.clinics)
+        .sort((a, b) => b[1].arrived - a[1].arrived);
+      const visitRank = visitRanked.findIndex(([name]) => name === CLINIC) + 1;
+      document.getElementById('clinicRank').textContent = ordinal(visitRank);
+      const rankColor = visitRank <= 3 ? 'pct-green' : visitRank <= 7 ? 'pct-yellow' : 'pct-red';
+      const rankNote = visitRank === 1 ? 'Most visits this week 🏆'
+        : visitRank <= 3 ? 'Top 3 in company ✓'
+        : 'of ' + totalClinics + ' clinics';
+      document.getElementById('clinicRankNote').textContent = rankNote;
+      document.getElementById('clinicRankNote').className = 'company-stat-pct ' + rankColor;
+
+      // ── Important Information ──
+      const items = data.importantInfo || [];
+      const container = document.getElementById('updatesContainer');
+      container.innerHTML = items.map(item => `
+        <div class="update-item">
+          <div class="update-title">${item.title}</div>
+          <div class="update-body">${autoLink(item.body)}</div>
+        </div>
+      `).join('');
+
+      // ── Footer ──
+      if (data.generatedAt) {
+        const d = new Date(data.generatedAt);
+        document.getElementById('footerGenerated').textContent =
+          'Last updated: ' + d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+      }
+
+      // Hide loading screen
+      document.getElementById('loadingScreen').classList.add('hidden');
+    }
+
+    // ── Fetch data.json ──
+    fetch('./data.json?t=' + Date.now())
+      .then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(data => renderDashboard(data))
+      .catch(err => {
+        const screen = document.getElementById('loadingScreen');
+        screen.querySelector('.loading-text').textContent =
+          'Could not load data — ' + err.message + '. Try refreshing.';
+      });
+  </script>
+
+</body>
+</html>
