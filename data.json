@@ -1,109 +1,109 @@
 {
-  "weekLabel": "Jun 9 – Jun 13, 2026",
-  "generatedAt": "2026-06-19T19:04:46.787Z",
+  "weekLabel": "Jun 15 – Jun 19, 2026",
+  "generatedAt": "2026-06-21T20:33:26.658Z",
   "clinics": {
     "Blue Valley": {
       "arrived": 224,
-      "goal": 254,
       "scheduled": 259,
       "cancels": 35,
       "cancelRate": 13.51,
-      "nps": 11
+      "nps": 11,
+      "goal": 202
     },
     "Crossroads": {
       "arrived": 142,
-      "goal": 210,
       "scheduled": 175,
-      "cancels": 33,
-      "cancelRate": 18.86,
-      "nps": 8
+      "cancels": 32,
+      "cancelRate": 18.29,
+      "nps": 8,
+      "goal": 149
     },
     "Iowa": {
       "arrived": 21,
-      "goal": null,
       "scheduled": 23,
       "cancels": 2,
       "cancelRate": 8.7,
-      "nps": 1
+      "nps": 1,
+      "goal": null
     },
     "KCK": {
       "arrived": 52,
-      "goal": 65,
       "scheduled": 63,
       "cancels": 11,
       "cancelRate": 17.46,
-      "nps": 5
+      "nps": 5,
+      "goal": 32
     },
     "Leawood": {
       "arrived": 458,
-      "goal": 424,
-      "scheduled": 512,
-      "cancels": 54,
-      "cancelRate": 10.55,
-      "nps": 19
+      "scheduled": 521,
+      "cancels": 61,
+      "cancelRate": 11.71,
+      "nps": 19,
+      "goal": 354
     },
     "Lees Summit": {
       "arrived": 289,
-      "goal": 353,
       "scheduled": 337,
-      "cancels": 48,
-      "cancelRate": 14.24,
-      "nps": 13
+      "cancels": 47,
+      "cancelRate": 13.95,
+      "nps": 13,
+      "goal": 262
     },
     "Liberty": {
       "arrived": 51,
-      "goal": 130,
       "scheduled": 66,
       "cancels": 11,
       "cancelRate": 16.67,
-      "nps": 4
+      "nps": 4,
+      "goal": 130
     },
     "Olathe": {
       "arrived": 279,
-      "goal": 283,
       "scheduled": 349,
       "cancels": 59,
       "cancelRate": 16.91,
-      "nps": 17
+      "nps": 17,
+      "goal": 157
     },
     "Overland Park": {
       "arrived": 116,
-      "goal": 190,
       "scheduled": 140,
-      "cancels": 24,
-      "cancelRate": 17.14,
-      "nps": 6
+      "cancels": 23,
+      "cancelRate": 16.43,
+      "nps": 6,
+      "goal": 130
     },
     "Paola": {
       "arrived": 83,
-      "goal": 92,
       "scheduled": 94,
       "cancels": 11,
       "cancelRate": 11.7,
-      "nps": 3
+      "nps": 3,
+      "goal": 47
     },
     "Raymore": {
       "arrived": 167,
-      "goal": 208,
       "scheduled": 207,
       "cancels": 40,
       "cancelRate": 19.32,
-      "nps": 10
+      "nps": 10,
+      "goal": 210
     },
     "Shawnee": {
       "arrived": 360,
-      "goal": 395,
       "scheduled": 407,
       "cancels": 47,
       "cancelRate": 11.55,
-      "nps": 18
+      "nps": 18,
+      "goal": 297
     }
   },
   "companyTotals": {
     "arrived": 2242,
     "nps": 115,
-    "cancelRate": 14.68,
-    "goalTotal": 2604
+    "cancelRate": 14.35,
+    "goalTotal": 1970
   },
   "importantInfo": [
     {
