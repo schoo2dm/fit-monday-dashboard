@@ -454,28 +454,34 @@
       // ── New Patients ──
       const nps = clinic.nps;
       document.getElementById('npValue').textContent = nps;
+      window._npVisits = nps;
 
-      // NP rank
-      const npRanked = Object.entries(data.clinics)
-        .sort((a, b) => b[1].nps - a[1].nps);
-      const npRank = npRanked.findIndex(([name]) => name === CLINIC) + 1;
-      const totalClinics = npRanked.length;
-      document.getElementById('npRankLine').innerHTML =
-        'Ranked <strong>' + ordinal(npRank) + '</strong> of ' + totalClinics + ' clinics';
-
-      const npColor = npRank === 1 ? 'green' : npRank <= Math.ceil(totalClinics / 2) ? 'yellow' : 'red';
-      applyColor(
-        document.getElementById('npBar'),
-        document.getElementById('npBadge'),
-        document.getElementById('npDot'),
-        npColor
-      );
-      // Bar = relative to top clinic
-      const topNps = npRanked[0][1].nps;
-      document.getElementById('npBar').style.width = Math.round(nps / topNps * 100) + '%';
-      document.getElementById('npBadgeText').textContent = npRank === 1
-        ? 'Most NPs this week 🏆'
-        : ordinal(npRank) + ' in company';
+      // NP goal
+      const npGoal = clinic.npGoal || 0;
+      var npGH = 'Goal: <strong>' + (npGoal > 0 ? npGoal.toLocaleString() : '—') + '</strong>' +
+        ' <button class="goal-edit-btn" onclick="showNpGoalUnlock()" title="Edit NP goal">✏️</button>' +
+        '<div class="goal-unlock-row" id="npGoalUnlockRow">' +
+        '<input type="password" id="npGoalPinInput" class="goal-pin-input" placeholder="Enter password">' +
+        '<button class="btn-goal-unlock" onclick="unlockNpGoal()">Unlock</button>' +
+        '<button class="btn-goal-cancel" onclick="cancelNpGoalEdit()">✕</button>' +
+        '</div>' +
+        '<div class="goal-edit-row" id="npGoalEditRow">' +
+        '<input type="number" id="npGoalInput" class="goal-pin-input" min="1" value="" style="width:80px">' +
+        '<button class="btn-goal-save" onclick="saveNpGoal()">Save</button>' +
+        '<button class="btn-goal-cancel" onclick="cancelNpGoalEdit()">✕</button>' +
+        '</div>';
+      document.getElementById('npRankLine').innerHTML = npGH;
+      if (npGoal > 0) {
+        var npPct = Math.round(nps / npGoal * 1000) / 10;
+        document.getElementById('npBar').style.width = Math.min(npPct,100) + '%';
+        var npCol = npPct >= 100 ? 'green' : npPct >= 70 ? 'yellow' : 'red';
+        applyColor(document.getElementById('npBar'),document.getElementById('npBadge'),document.getElementById('npDot'),npCol);
+        document.getElementById('npBadgeText').textContent = npPct >= 100 ? 'Goal met ✓' : npPct.toFixed(1) + '% of goal';
+      } else {
+        document.getElementById('npBar').style.width = '0%';
+        applyColor(document.getElementById('npBar'),document.getElementById('npBadge'),document.getElementById('npDot'),'yellow');
+        document.getElementById('npBadgeText').textContent = 'No goal set';
+      }
 
       // ── Cancel Rate ──
       const cancelRate = clinic.cancelRate;
@@ -559,6 +565,11 @@
     function unlockGoal(){var p=document.getElementById('goalPinInput').value;if(p===CD_PASSWORD){document.getElementById('goalUnlockRow').classList.remove('visible');document.getElementById('goalEditRow').classList.add('visible');var s=document.querySelector('#arrivedGoalLine strong');if(s){document.getElementById('goalInput').value=s.textContent.replace(/,/g,'');}document.getElementById('goalInput').focus();}else{document.getElementById('goalPinInput').value='';document.getElementById('goalPinInput').placeholder='Wrong password';}}
     function cancelGoalEdit(){document.getElementById('goalEditRow').classList.remove('visible');document.getElementById('goalUnlockRow').classList.remove('visible');document.getElementById('goalPinInput').value='';}
     function saveGoal(){var g=parseInt(document.getElementById('goalInput').value,10);if(!g||g<1)return;var u=APPS_SCRIPT_URL+'?action=updateGoal&clinic='+encodeURIComponent(CLINIC)+'&goal='+g;document.getElementById('goalInput').disabled=true;fetch(u).then(function(r){return r.json();}).then(function(d){if(d.success){cancelGoalEdit();var a=window._arrivedVisits||0;var p=Math.round(a/g*1000)/10;document.querySelector('#arrivedGoalLine strong').textContent=g.toLocaleString();document.getElementById('arrivedBar').style.width=Math.min(p,100)+'%';var c=visitColor(p);applyColor(document.getElementById('arrivedBar'),document.getElementById('arrivedBadge'),document.getElementById('arrivedDot'),c);document.getElementById('arrivedBadgeText').textContent=p>=100?'Goal met ✓':p.toFixed(1)+'% of goal';}else{alert('Save failed: '+(d.error||'unknown'));}}).catch(function(e){alert('Error: '+e.message);}).finally(function(){document.getElementById('goalInput').disabled=false;}); }
+
+    function showNpGoalUnlock(){document.getElementById('npGoalUnlockRow').classList.toggle('visible');}
+    function unlockNpGoal(){var p=document.getElementById('npGoalPinInput').value;if(p===CD_PASSWORD){document.getElementById('npGoalUnlockRow').classList.remove('visible');document.getElementById('npGoalEditRow').classList.add('visible');var s=document.querySelector('#npRankLine strong');if(s){document.getElementById('npGoalInput').value=s.textContent.replace(/,/g,'');}document.getElementById('npGoalInput').focus();}else{document.getElementById('npGoalPinInput').value='';document.getElementById('npGoalPinInput').placeholder='Wrong password';}}
+    function cancelNpGoalEdit(){document.getElementById('npGoalEditRow').classList.remove('visible');document.getElementById('npGoalUnlockRow').classList.remove('visible');document.getElementById('npGoalPinInput').value='';}
+    function saveNpGoal(){var g=parseInt(document.getElementById('npGoalInput').value,10);if(!g||g<1)return;var u=APPS_SCRIPT_URL+'?action=updateNpGoal&clinic='+encodeURIComponent(CLINIC)+'&goal='+g;document.getElementById('npGoalInput').disabled=true;fetch(u).then(function(r){return r.json();}).then(function(d){if(d.success){cancelNpGoalEdit();var a=window._npVisits||0;var p=Math.round(a/g*1000)/10;document.querySelector('#npRankLine strong').textContent=g.toLocaleString();document.getElementById('npBar').style.width=Math.min(p,100)+'%';var c=p>=100?'green':p>=70?'yellow':'red';applyColor(document.getElementById('npBar'),document.getElementById('npBadge'),document.getElementById('npDot'),c);document.getElementById('npBadgeText').textContent=p>=100?'Goal met ✓':p.toFixed(1)+'% of goal';}else{alert('Save failed: '+(d.error||'unknown'));}}).catch(function(e){alert('Error: '+e.message);}).finally(function(){document.getElementById('npGoalInput').disabled=false;}); }
 
     // ── Fetch data.json ──
     fetch('./data.json?t=' + Date.now())
