@@ -8,7 +8,8 @@
       "cancels": 37,
       "cancelRate": 15.16,
       "nps": 12,
-      "goal": 202
+      "goal": 202,
+      "npGoal": 0
     },
     "Crossroads": {
       "arrived": 152,
@@ -16,7 +17,8 @@
       "cancels": 36,
       "cancelRate": 19.15,
       "nps": 12,
-      "goal": 149
+      "goal": 149,
+      "npGoal": 0
     },
     "Iowa": {
       "arrived": 22,
@@ -24,7 +26,8 @@
       "cancels": 3,
       "cancelRate": 12,
       "nps": 6,
-      "goal": null
+      "goal": null,
+      "npGoal": 0
     },
     "KCK": {
       "arrived": 53,
@@ -32,7 +35,8 @@
       "cancels": 4,
       "cancelRate": 7.02,
       "nps": 2,
-      "goal": 32
+      "goal": 32,
+      "npGoal": 0
     },
     "Leawood": {
       "arrived": 412,
@@ -40,7 +44,8 @@
       "cancels": 55,
       "cancelRate": 11.63,
       "nps": 16,
-      "goal": 354
+      "goal": 354,
+      "npGoal": 0
     },
     "Lees Summit": {
       "arrived": 346,
@@ -48,7 +53,8 @@
       "cancels": 67,
       "cancelRate": 16.22,
       "nps": 29,
-      "goal": 262
+      "goal": 262,
+      "npGoal": 0
     },
     "Liberty": {
       "arrived": 89,
@@ -56,7 +62,8 @@
       "cancels": 9,
       "cancelRate": 9.09,
       "nps": 13,
-      "goal": 130
+      "goal": 130,
+      "npGoal": 0
     },
     "Olathe": {
       "arrived": 304,
@@ -64,7 +71,8 @@
       "cancels": 40,
       "cancelRate": 11.43,
       "nps": 22,
-      "goal": 157
+      "goal": 157,
+      "npGoal": 0
     },
     "Overland Park": {
       "arrived": 128,
@@ -72,7 +80,8 @@
       "cancels": 28,
       "cancelRate": 17.95,
       "nps": 10,
-      "goal": 130
+      "goal": 130,
+      "npGoal": 0
     },
     "Paola": {
       "arrived": 79,
@@ -80,7 +89,8 @@
       "cancels": 19,
       "cancelRate": 19.39,
       "nps": 5,
-      "goal": 47
+      "goal": 47,
+      "npGoal": 0
     },
     "Raymore": {
       "arrived": 181,
@@ -88,7 +98,8 @@
       "cancels": 35,
       "cancelRate": 15.91,
       "nps": 15,
-      "goal": 210
+      "goal": 210,
+      "npGoal": 0
     },
     "Shawnee": {
       "arrived": 357,
@@ -96,7 +107,8 @@
       "cancels": 59,
       "cancelRate": 14.11,
       "nps": 19,
-      "goal": 409
+      "goal": 409,
+      "npGoal": 0
     }
   },
   "companyTotals": {
