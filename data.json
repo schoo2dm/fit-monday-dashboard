@@ -96,14 +96,14 @@
       "cancels": 59,
       "cancelRate": 14.11,
       "nps": 19,
-      "goal": 409
+      "goal": 410
     }
   },
   "companyTotals": {
     "arrived": 2330,
     "nps": 161,
     "cancelRate": 14.3,
-    "goalTotal": 1970
+    "goalTotal": 2083
   },
   "importantInfo": [
     {
