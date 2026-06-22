@@ -139,7 +139,7 @@
     {
       "id": "4",
       "title": "Communicate 1-Offs for Schedule-Out Tracking",
-      "body": "If a new patient couldn't schedule out for a legitimate reason, email Ryan Macan at ryan@fitmjc.com. Without that communication, it shows as a missed schedule-out.\n\nLegitimate reasons include:\n? Patient not local / just visiting KC\n? A red flag or emergency requiring an ER referral"
+      "body": "If a new patient couldn't schedule out for a legitimate reason, email Ryan Macan at ryan@fitmjc.com. Without that communication, it shows as a missed schedule-out.\n\nLegitimate reasons include:\n1. Patient not local / just visiting KC\n2. A red flag or emergency requiring an ER referral"
     },
     {
       "id": "7",
