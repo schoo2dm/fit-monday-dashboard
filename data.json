@@ -1,5 +1,5 @@
 {
-  "weekLabel": "Jun 15 – Jun 19, 2026",
+  "weekLabel": "Jun 15 ? Jun 19, 2026",
   "generatedAt": "2026-06-22T03:51:50.759Z",
   "clinics": {
     "Blue Valley": {
@@ -96,7 +96,7 @@
       "cancels": 59,
       "cancelRate": 14.11,
       "nps": 19,
-      "goal": 297
+      "goal": 409
     }
   },
   "companyTotals": {
@@ -124,7 +124,7 @@
     {
       "id": "1",
       "title": "Existing Patient Evaluation Tracking",
-      "body": "Soon we'll start tracking scheduling-out scores for re-evals (EP - Initial Evaluation appt type). Please treat re-evals like new patients — educate on tissue healing times, set expectations for a 4–6 week treatment plan, and let them know you are the quarterback of their care."
+      "body": "Soon we'll start tracking scheduling-out scores for re-evals (EP - Initial Evaluation appt type). Please treat re-evals like new patients ? educate on tissue healing times, set expectations for a 4?6 week treatment plan, and let them know you are the quarterback of their care."
     },
     {
       "id": "2",
@@ -139,7 +139,7 @@
     {
       "id": "4",
       "title": "Communicate 1-Offs for Schedule-Out Tracking",
-      "body": "If a new patient couldn't schedule out for a legitimate reason, email Ryan Macan at ryan@fitmjc.com. Without that communication, it shows as a missed schedule-out.\n\nLegitimate reasons include:\n• Patient not local / just visiting KC\n• A red flag or emergency requiring an ER referral"
+      "body": "If a new patient couldn't schedule out for a legitimate reason, email Ryan Macan at ryan@fitmjc.com. Without that communication, it shows as a missed schedule-out.\n\nLegitimate reasons include:\n? Patient not local / just visiting KC\n? A red flag or emergency requiring an ER referral"
     },
     {
       "id": "6",
@@ -159,7 +159,7 @@
     {
       "id": "9",
       "title": "New Personal Appointment Types / Colors",
-      "body": "Prompt 10.0 now supports color coding for schedule blocks.\n\nLunch Break → Pink\nNP Access Blocks → Green\nMonthly Check-in / Meeting / Yearly Review → Turquoise\nCE Block → Yellow\nL10 Meeting → Khaki"
+      "body": "Prompt 10.0 now supports color coding for schedule blocks.\n\nLunch Break ? Pink\nNP Access Blocks ? Green\nMonthly Check-in / Meeting / Yearly Review ? Turquoise\nCE Block ? Yellow\nL10 Meeting ? Khaki"
     },
     {
       "id": "10",
@@ -169,22 +169,22 @@
     {
       "id": "11",
       "title": "Building and Maintaining a Full Schedule",
-      "body": "If your visit count was below your weekly average, reflect on:\n\n• If you were out, how can we better ensure your patients stay on track?\n• If patients were traveling, how can we anticipate those gaps?"
+      "body": "If your visit count was below your weekly average, reflect on:\n\n? If you were out, how can we better ensure your patients stay on track?\n? If patients were traveling, how can we anticipate those gaps?"
     },
     {
       "id": "12",
-      "title": "Case Overview Dashboard — Old Patients",
+      "title": "Case Overview Dashboard ? Old Patients",
       "body": "Use the Case Overview Dashboard weekly to go through open cases, reach out to patients who haven't been in, update treatment plans, or discharge inactive cases.\n\nhttps://support.promptemr.com/article/704-the-active-cases-dashboard-tool"
     },
     {
       "id": "13",
       "title": "Next Events",
-      "body": "• October 24–25: ICE: Extremity Management\n• Check your corporate challenge event dates and plan ahead!"
+      "body": "? October 24?25: ICE: Extremity Management\n? Check your corporate challenge event dates and plan ahead!"
     },
     {
       "id": "14",
       "title": "PCC / Admin Reminders",
-      "body": "• Dashboard: Review Eligibility, Intake Conflicts, and Benefits Verification\n• Demographics: Gender is required — ensure it's filled out for all patients\n• Referring Providers: Must be entered on each Case for Plan of Care and Medicare processing"
+      "body": "? Dashboard: Review Eligibility, Intake Conflicts, and Benefits Verification\n? Demographics: Gender is required ? ensure it's filled out for all patients\n? Referring Providers: Must be entered on each Case for Plan of Care and Medicare processing"
     },
     {
       "id": "15",
@@ -194,7 +194,7 @@
     {
       "id": "16",
       "title": "Provider Daily Rocks",
-      "body": "Use your downtime wisely — every provider has 3 daily rocks:\n\n1. Deliver exceptional one-on-one care\n2. Build trusting relationships via community engagement\n3. Complete billing & documentation in a timely manner"
+      "body": "Use your downtime wisely ? every provider has 3 daily rocks:\n\n1. Deliver exceptional one-on-one care\n2. Build trusting relationships via community engagement\n3. Complete billing & documentation in a timely manner"
     },
     {
       "id": "17",
