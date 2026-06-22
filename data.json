@@ -159,7 +159,7 @@
     {
       "id": "9",
       "title": "New Personal Appointment Types / Colors",
-      "body": "Prompt 10.0 now supports color coding for schedule blocks.\n\nLunch Break ? Pink\nNP Access Blocks ? Green\nMonthly Check-in / Meeting / Yearly Review ? Turquoise\nCE Block ? Yellow\nL10 Meeting ? Khaki"
+      "body": "Prompt 10.0 now supports color coding for schedule blocks.\n\nLunch Break = Pink\nNP Access Blocks = Green\nMonthly Check-in / Meeting / Yearly Review = Turquoise\nCE Block = Yellow\nL10 Meeting = Khaki"
     },
     {
       "id": "10",
