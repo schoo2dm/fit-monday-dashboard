@@ -184,7 +184,7 @@
     {
       "id": "14",
       "title": "PCC / Admin Reminders",
-      "body": "? Dashboard: Review Eligibility, Intake Conflicts, and Benefits Verification\n? Demographics: Gender is required ? ensure it's filled out for all patients\n? Referring Providers: Must be entered on each Case for Plan of Care and Medicare processing"
+      "body": "1. Dashboard: Review Eligibility, Intake Conflicts, and Benefits Verification\n2. Demographics: Gender is required so please ensure it's filled out for all patients\n3. Referring Providers: Must be entered on each Case for Plan of Care and Medicare processing"
     },
     {
       "id": "15",
