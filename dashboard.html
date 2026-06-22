@@ -458,6 +458,7 @@
 
       // NP goal
       const npGoal = clinic.npGoal || 0;
+      const totalClinics = Object.keys(data.clinics).length;
       var npGH = 'Goal: <strong>' + (npGoal > 0 ? npGoal.toLocaleString() : '—') + '</strong>' +
         ' <button class="goal-edit-btn" onclick="showNpGoalUnlock()" title="Edit NP goal">✏️</button>' +
         '<div class="goal-unlock-row" id="npGoalUnlockRow">' +
