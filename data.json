@@ -80,7 +80,7 @@
       "cancels": 28,
       "cancelRate": 17.95,
       "nps": 10,
-      "goal": 130,
+      "goal": 160,
       "npGoal": 0
     },
     "Paola": {
@@ -115,7 +115,7 @@
     "arrived": 2330,
     "nps": 161,
     "cancelRate": 14.3,
-    "goalTotal": 2082
+    "goalTotal": 2112
   },
   "importantInfo": [
     {
