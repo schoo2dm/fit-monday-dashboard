@@ -9,7 +9,8 @@
       "cancelRate": 15.16,
       "nps": 12,
       "goal": 202,
-      "npGoal": 0
+      "npGoal": 0,
+      "cdMessage": ""
     },
     "Crossroads": {
       "arrived": 152,
@@ -18,7 +19,8 @@
       "cancelRate": 19.15,
       "nps": 12,
       "goal": 149,
-      "npGoal": 0
+      "npGoal": 0,
+      "cdMessage": ""
     },
     "Iowa": {
       "arrived": 22,
@@ -27,7 +29,8 @@
       "cancelRate": 12,
       "nps": 6,
       "goal": null,
-      "npGoal": 0
+      "npGoal": 0,
+      "cdMessage": ""
     },
     "KCK": {
       "arrived": 53,
@@ -36,7 +39,8 @@
       "cancelRate": 7.02,
       "nps": 2,
       "goal": 32,
-      "npGoal": 0
+      "npGoal": 0,
+      "cdMessage": ""
     },
     "Leawood": {
       "arrived": 412,
@@ -45,7 +49,8 @@
       "cancelRate": 11.63,
       "nps": 16,
       "goal": 354,
-      "npGoal": 0
+      "npGoal": 0,
+      "cdMessage": ""
     },
     "Lees Summit": {
       "arrived": 346,
@@ -54,7 +59,8 @@
       "cancelRate": 16.22,
       "nps": 29,
       "goal": 262,
-      "npGoal": 0
+      "npGoal": 0,
+      "cdMessage": ""
     },
     "Liberty": {
       "arrived": 89,
@@ -63,7 +69,8 @@
       "cancelRate": 9.09,
       "nps": 13,
       "goal": 130,
-      "npGoal": 0
+      "npGoal": 0,
+      "cdMessage": ""
     },
     "Olathe": {
       "arrived": 304,
@@ -72,7 +79,8 @@
       "cancelRate": 11.43,
       "nps": 22,
       "goal": 157,
-      "npGoal": 0
+      "npGoal": 0,
+      "cdMessage": ""
     },
     "Overland Park": {
       "arrived": 128,
@@ -81,7 +89,8 @@
       "cancelRate": 17.95,
       "nps": 10,
       "goal": 160,
-      "npGoal": 12
+      "npGoal": 12,
+      "cdMessage": ""
     },
     "Paola": {
       "arrived": 79,
@@ -90,7 +99,8 @@
       "cancelRate": 19.39,
       "nps": 5,
       "goal": 47,
-      "npGoal": 0
+      "npGoal": 0,
+      "cdMessage": ""
     },
     "Raymore": {
       "arrived": 181,
@@ -99,7 +109,8 @@
       "cancelRate": 15.91,
       "nps": 15,
       "goal": 210,
-      "npGoal": 0
+      "npGoal": 0,
+      "cdMessage": ""
     },
     "Shawnee": {
       "arrived": 357,
@@ -108,7 +119,8 @@
       "cancelRate": 14.11,
       "nps": 19,
       "goal": 409,
-      "npGoal": 18
+      "npGoal": 18,
+      "cdMessage": ""
     }
   },
   "companyTotals": {
