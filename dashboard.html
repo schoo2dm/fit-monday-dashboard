@@ -1,3 +1,12 @@
+    function showCompanyGoalUnlock(){document.getElementById('companyGoalUnlockRow').classList.toggle('visible');}
+    function unlockCompanyGoal(){var p=document.getElementById('companyGoalPinInput').value;if(p===CD_PASSWORD){document.getElementById('companyGoalUnlockRow').classList.remove('visible');document.getElementById('companyGoalEditRow').classList.add('visible');var s=document.querySelector('#companyVisitsGoal strong');if(s){document.getElementById('companyGoalInput').value=s.textContent.replace(/[^0-9]/g,'');}document.getElementById('companyGoalInput').focus();}else{document.getElementById('companyGoalPinInput').value='';document.getElementById('companyGoalPinInput').placeholder='Wrong password';}}
+    function cancelCompanyGoalEdit(){document.getElementById('companyGoalEditRow').classList.remove('visible');document.getElementById('companyGoalUnlockRow').classList.remove('visible');document.getElementById('companyGoalPinInput').value='';}
+    function saveCompanyGoal(){var g=parseInt(document.getElementById('companyGoalInput').value,10);if(!g||g<1)return;var u=APPS_SCRIPT_URL+'?action=updateCompanyGoal&goal='+g;document.getElementById('companyGoalInput').disabled=true;fetch(u).then(function(r){return r.json();}).then(function(d){if(d.success){cancelCompanyGoalEdit();var a=window._companyArrived||0;var p=Math.round(a/g*1000)/10;document.querySelector('#companyVisitsGoal strong').textContent=g.toLocaleString()+'/wk';document.getElementById('companyVisitsPct').textContent=p+'% of goal';document.getElementById('companyVisitsPct').className='company-stat-pct '+(p>=95?'pct-green':p>=80?'pct-yellow':'pct-red');}else{alert('Save failed: '+(d.error||'unknown'));}}).catch(function(e){alert('Error: '+e.message);}).finally(function(){document.getElementById('companyGoalInput').disabled=false;}); }
+    function showCompanyNpGoalUnlock(){document.getElementById('companyNpGoalUnlockRow').classList.toggle('visible');}
+    function unlockCompanyNpGoal(){var p=document.getElementById('companyNpGoalPinInput').value;if(p===CD_PASSWORD){document.getElementById('companyNpGoalUnlockRow').classList.remove('visible');document.getElementById('companyNpGoalEditRow').classList.add('visible');var s=document.querySelector('#companyNpsAvg strong');if(s){document.getElementById('companyNpGoalInput').value=s.textContent.replace(/,/g,'');}document.getElementById('companyNpGoalInput').focus();}else{document.getElementById('companyNpGoalPinInput').value='';document.getElementById('companyNpGoalPinInput').placeholder='Wrong password';}}
+    function cancelCompanyNpGoalEdit(){document.getElementById('companyNpGoalEditRow').classList.remove('visible');document.getElementById('companyNpGoalUnlockRow').classList.remove('visible');document.getElementById('companyNpGoalPinInput').value='';}
+    function saveCompanyNpGoal(){var g=parseInt(document.getElementById('companyNpGoalInput').value,10);if(!g||g<1)return;var u=APPS_SCRIPT_URL+'?action=updateCompanyNpGoal&goal='+g;document.getElementById('companyNpGoalInput').disabled=true;fetch(u).then(function(r){return r.json();}).then(function(d){if(d.success){cancelCompanyNpGoalEdit();document.querySelector('#companyNpsAvg strong').textContent=g.toLocaleString();}else{alert('Save failed: '+(d.error||'unknown'));}}).catch(function(e){alert('Error: '+e.message);}).finally(function(){document.getElementById('companyNpGoalInput').disabled=false;}); }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -509,14 +518,25 @@
 
       // ── Company Snapshot ──
       const totals  = data.companyTotals;
+      window._companyArrived = totals.arrived;
+      window._companyNps = totals.nps;
       const compPct = totals.goalTotal
         ? Math.round(totals.arrived / totals.goalTotal * 1000) / 10
         : null;
 
       document.getElementById('companyVisits').textContent = totals.arrived.toLocaleString();
-      document.getElementById('companyVisitsGoal').textContent = totals.goalTotal
-        ? 'Goal: ' + totals.goalTotal.toLocaleString() + '/wk'
-        : '—';
+      //CVG_REPLACED//
+      var cvGL = totals.goalTotal ? 'Goal: <strong>' + totals.goalTotal.toLocaleString() + '/wk</strong>' : 'No goal set';
+      document.getElementById('companyVisitsGoal').innerHTML = cvGL +
+        ' <button class="goal-edit-btn" onclick="showCompanyGoalUnlock()" title="Edit company visits goal">✏️</button>' +
+        '<div class="goal-unlock-row" id="companyGoalUnlockRow">' +
+        '<input type="password" id="companyGoalPinInput" class="goal-pin-input" placeholder="Enter password">' +
+        '<button class="btn-goal-unlock" onclick="unlockCompanyGoal()">Unlock</button>' +
+        '<button class="btn-goal-cancel" onclick="cancelCompanyGoalEdit()">✕</button></div>' +
+        '<div class="goal-edit-row" id="companyGoalEditRow">' +
+        '<input type="number" id="companyGoalInput" class="goal-pin-input" min="1" value="">' +
+        '<button class="btn-goal-save" onclick="saveCompanyGoal()">Save</button>' +
+        '<button class="btn-goal-cancel" onclick="cancelCompanyGoalEdit()">✕</button></div>'
       if (compPct !== null) {
         const compEl = document.getElementById('companyVisitsPct');
         compEl.textContent = compPct + '% of goal';
@@ -525,9 +545,19 @@
 
       document.getElementById('companyNps').textContent = totals.nps;
       const avgNps = (totals.nps / totalClinics).toFixed(1);
-      document.getElementById('companyNpsAvg').textContent = avgNps + '/clinic avg';
-      document.getElementById('companyNpsAvg').className =
-        'company-stat-pct ' + (nps >= parseFloat(avgNps) ? 'pct-green' : 'pct-yellow');
+      var compNpGoal = totals.npGoal || 0;
+      var cnGL = compNpGoal > 0 ? 'Goal: <strong>' + compNpGoal.toLocaleString() + '</strong>' : 'No goal set';
+      document.getElementById('companyNpsAvg').innerHTML = cnGL +
+        ' <button class="goal-edit-btn" onclick="showCompanyNpGoalUnlock()" title="Edit company NP goal">✏️</button>' +
+        '<div class="goal-unlock-row" id="companyNpGoalUnlockRow">' +
+        '<input type="password" id="companyNpGoalPinInput" class="goal-pin-input" placeholder="Enter password">' +
+        '<button class="btn-goal-unlock" onclick="unlockCompanyNpGoal()">Unlock</button>' +
+        '<button class="btn-goal-cancel" onclick="cancelCompanyNpGoalEdit()">✕</button></div>' +
+        '<div class="goal-edit-row" id="companyNpGoalEditRow">' +
+        '<input type="number" id="companyNpGoalInput" class="goal-pin-input" min="1" value="">' +
+        '<button class="btn-goal-save" onclick="saveCompanyNpGoal()">Save</button>' +
+        '<button class="btn-goal-cancel" onclick="cancelCompanyNpGoalEdit()">✕</button></div>'
+      // companyNpsAvg className handled inline
 
       // Clinic rank by arrived visits
       const visitRanked = Object.entries(data.clinics)
