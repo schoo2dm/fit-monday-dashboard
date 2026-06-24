@@ -312,7 +312,7 @@
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyXBdhxGEXdtrefJnkflXUjj1SZ98j_QNmLaevns70R5sJ6T-4uw_hPBB8blf-L2oED/exec';
 
     function refreshDisplay() {
-      const saved = localStorage.getItem(CD_KEY);
+      const saved=(window._dd&&window._dd.clinics[CLINIC]&&window._dd.clinics[CLINIC].cdMessage!==undefined?window._dd.clinics[CLINIC].cdMessage:null)||localStorage.getItem(CD_KEY);
       const display = document.getElementById('cdMessageDisplay');
       if (saved && saved.trim()) {
         display.innerHTML = '';
@@ -348,7 +348,7 @@
       editMode.classList.add('visible');
       const textarea = document.getElementById('cdMessage');
       const statusEl = document.getElementById('saveStatus');
-      const saved = localStorage.getItem(CD_KEY);
+      const saved=(window._dd&&window._dd.clinics[CLINIC]&&window._dd.clinics[CLINIC].cdMessage!==undefined?window._dd.clinics[CLINIC].cdMessage:null)||localStorage.getItem(CD_KEY);
       if (saved) {
         textarea.value = saved;
         statusEl.textContent = 'Saved message loaded ✓';
@@ -376,7 +376,7 @@
     function saveMessage() {
       const textarea = document.getElementById('cdMessage');
       const statusEl = document.getElementById('saveStatus');
-      localStorage.setItem(CD_KEY, textarea.value);
+      var _m=textarea.value;localStorage.setItem(CD_KEY,_m);statusEl.textContent='Saving...';fetch(APPS_SCRIPT_URL+'?action=saveMessage&clinic='+encodeURIComponent(CLINIC)+'&message='+encodeURIComponent(_m)).then(function(r){return r.json();}).then(function(d){statusEl.textContent=d.success?'Saved ✓':'Save failed';statusEl.classList.add('saved');if(window._dd&&window._dd.clinics[CLINIC])window._dd.clinics[CLINIC].cdMessage=_m;}).catch(function(){});
       statusEl.textContent = 'Saved ✓';
       statusEl.classList.add('saved');
     }
@@ -514,7 +514,7 @@
       document.getElementById('cancelBadgeText').textContent = cancelLabel;
 
       // ── Company Snapshot ──
-      const totals  = data.companyTotals;
+      window._dd=data;var _sm=data.clinics[CLINIC]?data.clinics[CLINIC].cdMessage:null;if(_sm!==null&&_sm!==undefined){localStorage.setItem(CD_KEY,_sm);refreshDisplay();}const totals  = data.companyTotals;
       window._companyArrived = totals.arrived;
       window._companyNps = totals.nps;
       const compPct = totals.goalTotal
