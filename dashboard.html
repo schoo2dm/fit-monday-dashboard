@@ -40,7 +40,7 @@
       border-bottom: 3px solid #CC0000;
     }
     .header-logo-area { display: flex; align-items: center; gap: 16px; }
-    .logo-img { height: 44px; width: auto; display: block; }
+    .logo-img { height: 44px; width: auto; display: block; background: white; border-radius: 5px; padding: 3px 8px; }
     .logo-placeholder { display: flex; flex-direction: column; line-height: 1.1; }
     .logo-fit { font-size: 24px; font-weight: 900; color: #CC0000; letter-spacing: 3px; }
     .logo-sub { font-size: 9px; font-weight: 600; color: #FFFFFF; letter-spacing: 3px; text-transform: uppercase; opacity: 0.75; }
@@ -425,7 +425,7 @@
       // Page title & header
       document.getElementById('pageTitle').textContent = CLINIC + ' — Weekly Briefing | F.I.T. MJC';
       document.getElementById('headerClinicName').textContent = CLINIC;
-      document.getElementById('headerWeekDate').textContent = 'Week of ' + data.weekLabel;
+      (function(){var now=new Date();var day=now.getDay();var thisMon=new Date(now);thisMon.setDate(now.getDate()-(day===0?6:day-1));var lastMon=new Date(thisMon);lastMon.setDate(thisMon.getDate()-7);var lastSat=new Date(lastMon);lastSat.setDate(lastMon.getDate()+5);var mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];var fmt=function(d){return mo[d.getMonth()]+' '+d.getDate();};document.getElementById('headerWeekDate').textContent='Week of '+fmt(lastMon)+' – '+fmt(lastSat)+', '+lastSat.getFullYear();})();
       document.getElementById('sectionClinicLabel').textContent = CLINIC + ' — Last Week';
 
       // ── Arrived Visits ──
