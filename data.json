@@ -103,7 +103,8 @@
     "arrived": 2448,
     "nps": 119,
     "cancelRate": 14.58,
-    "goalTotal": 1970
+    "goalTotal": 1970,
+    "npGoal": 150
   },
   "importantInfo": [
     {
