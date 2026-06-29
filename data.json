@@ -80,7 +80,7 @@
       "cancels": 19,
       "cancelRate": 18.1,
       "nps": 1,
-      "goal": 47
+      "goal": 87
     },
     "Raymore": {
       "arrived": 196,
@@ -104,7 +104,7 @@
     "arrived": 2448,
     "nps": 119,
     "cancelRate": 14.58,
-    "goalTotal": 2428,
+    "goalTotal": 2123,
     "npGoal": 150
   },
   "importantInfo": [
