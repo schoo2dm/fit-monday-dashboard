@@ -69,7 +69,7 @@
       "cancels": 44,
       "cancelRate": 13.06,
       "nps": 12,
-      "goal": 157
+      "goal": 296
     },
     "Overland Park": {
       "arrived": 115,
@@ -111,7 +111,7 @@
     "arrived": 2448,
     "nps": 119,
     "cancelRate": 14.58,
-    "goalTotal": 2228,
+    "goalTotal": 2367,
     "npGoal": 150
   },
   "importantInfo": [
