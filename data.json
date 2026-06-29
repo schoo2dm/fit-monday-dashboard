@@ -96,7 +96,8 @@
       "cancels": 66,
       "cancelRate": 14.9,
       "nps": 11,
-      "goal": 297
+      "goal": 297,
+      "npGoal": 18
     }
   },
   "companyTotals": {
