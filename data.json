@@ -42,7 +42,7 @@
       "cancels": 54,
       "cancelRate": 10.17,
       "nps": 32,
-      "goal": 354,
+      "goal": 428,
       "cdMessage": "472-32 last week. OT had 22 evals so cheers to you all. Duties being reviewed and checked off, let me know if you had any difficulty or it was more than you thought it would be, Tate and Garrett are with us know so we can distribute the load more. Schedule templates have been completed for new providers. Will start to transition some aiming for mid July to give time to transition and talking with patients. Short week this week so let’s make it all we can before 4th of July!"
     },
     "Lees Summit": {
@@ -111,7 +111,7 @@
     "arrived": 2448,
     "nps": 119,
     "cancelRate": 14.58,
-    "goalTotal": 2154,
+    "goalTotal": 2228,
     "npGoal": 150
   },
   "importantInfo": [
