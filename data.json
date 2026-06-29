@@ -8,7 +8,8 @@
       "cancels": 42,
       "cancelRate": 16.47,
       "nps": 9,
-      "goal": 202
+      "goal": 202,
+      "npGoal": 14
     },
     "Crossroads": {
       "arrived": 173,
