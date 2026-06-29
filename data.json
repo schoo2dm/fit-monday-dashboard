@@ -36,7 +36,8 @@
       "cancels": 7,
       "cancelRate": 11.48,
       "nps": 3,
-      "goal": 32
+      "goal": 32,
+      "npGoal": 2
     },
     "Leawood": {
       "arrived": 472,
