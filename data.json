@@ -16,7 +16,8 @@
       "cancels": 34,
       "cancelRate": 16.35,
       "nps": 11,
-      "goal": 180
+      "goal": 180,
+      "npGoal": 11
     },
     "Iowa": {
       "arrived": 26,
