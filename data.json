@@ -110,7 +110,7 @@
       "cancels": 66,
       "cancelRate": 14.9,
       "nps": 11,
-      "goal": 410,
+      "goal": 399,
       "npGoal": 18
     }
   },
@@ -118,7 +118,7 @@
     "arrived": 2448,
     "nps": 119,
     "cancelRate": 14.58,
-    "goalTotal": 2415,
+    "goalTotal": 2404,
     "npGoal": 150
   },
   "importantInfo": [
