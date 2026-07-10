@@ -108,7 +108,7 @@
       "cancels": 41,
       "cancelRate": 19.07,
       "nps": 11,
-      "goal": 210,
+      "goal": 232,
       "npGoal": 15,
       "cdMessage": ""
     },
@@ -127,7 +127,7 @@
     "arrived": 2126,
     "nps": 94,
     "cancelRate": 14.12,
-    "goalTotal": 2484,
+    "goalTotal": 2440,
     "npGoal": 150
   },
   "importantInfo": [
