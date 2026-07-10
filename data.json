@@ -109,7 +109,7 @@
       "cancelRate": 19.07,
       "nps": 11,
       "goal": 210,
-      "npGoal": null,
+      "npGoal": 15,
       "cdMessage": ""
     },
     "Shawnee": {
