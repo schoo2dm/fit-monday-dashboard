@@ -18,7 +18,7 @@
       "cancels": 34,
       "cancelRate": 17.26,
       "nps": 8,
-      "goal": 180,
+      "goal": 172,
       "npGoal": 11,
       "cdMessage": "Please use downtime today to reach out to patients from last week that left without a future visit! We'll be going over goals this week during our one on ones, lets get Q3 started off with a bang!"
     },
@@ -127,7 +127,7 @@
     "arrived": 2493,
     "nps": 115,
     "cancelRate": 12.58,
-    "goalTotal": 2448,
+    "goalTotal": 2440,
     "npGoal": 150
   },
   "importantInfo": [
