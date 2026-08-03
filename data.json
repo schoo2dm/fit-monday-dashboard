@@ -132,6 +132,11 @@
   },
   "importantInfo": [
     {
+      "id": "msclgs9nqe07zru5p1o",
+      "title": "Process Change: NP Access Blocks",
+      "body": "When scheduling New Patients in a NP Access Block, instead of sliding the existing NP Access Block to another timeslot, please create a new NP Access Block so we can better track the Fill Rate of these Access Blocks. If a NP Access Block does not get filled within 24 hours, you will still slide the Block to open up that timeslot to existing patients."
+    },
+    {
       "id": "mrr4s5skltfc9dczkl",
       "title": "Check out SharePoint!",
       "body": "All of F.I.T.'s important documents, SOPs, and pertinent forms are now in Microsoft SharePoint. To get there, go to your email inbox, click the 9 dots in the top left corner of your screen, and then click \"SharePoint\". Take some time soon to familiarize yourself with the \"F.I.T. Muscle & Joint Clinic\" and \"F.I.T. Community Engagement\" folders, along with all of their subfolders. Use the search bar at the top to find what you need."
