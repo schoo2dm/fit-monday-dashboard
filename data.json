@@ -132,6 +132,11 @@
   },
   "importantInfo": [
     {
+      "id": "msclkcrbckoxjyv6iwc",
+      "title": "Process Change: ABN Charge",
+      "body": "Per the townhall that happened on Friday, we are changing the ABN code for all insurances that need an ABN (UHC, Cigna, Optum). If you did not attend the townhall on Friday, please see the recording on Teams.\nNew acceptable ABN codes are:\n20560 (Dry Needling 1-2 areas)\n20561 (Dry Needling 3+ areas)\nCUPTH (Cupping)"
+    },
+    {
       "id": "msclgs9nqe07zru5p1o",
       "title": "Process Change: NP Access Blocks",
       "body": "When scheduling New Patients in a NP Access Block, instead of sliding the existing NP Access Block to another timeslot, please create a new NP Access Block so we can better track the Fill Rate of these Access Blocks. If a NP Access Block does not get filled within 24 hours, you will still slide the Block to open up that timeslot to existing patients."
