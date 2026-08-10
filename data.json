@@ -18,7 +18,7 @@
       "cancels": 25,
       "cancelRate": 12.82,
       "nps": 9,
-      "goal": 172,
+      "goal": 183,
       "npGoal": 11,
       "cdMessage": "Best week of the month to close out strong! Please go back during down time this week to watch the ABN town hall meeting that we all missed on Friday. If you have any additional questions please let me know. "
     },
@@ -127,7 +127,7 @@
     "arrived": 2488,
     "nps": 140,
     "cancelRate": 12.38,
-    "goalTotal": 2494,
+    "goalTotal": 2505,
     "npGoal": 150
   },
   "importantInfo": [
