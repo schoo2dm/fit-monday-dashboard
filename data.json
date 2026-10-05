@@ -18,7 +18,7 @@
       "cancels": 50,
       "cancelRate": 17.67,
       "nps": 16,
-      "goal": 198,
+      "goal": 220,
       "npGoal": 11,
       "cdMessage": "Best week for new patients in the crossroads ever! On that note please make sure that you are not scheduling over your Access blocks until 24 hours in advance. Overall fell 6 short of our goal but a great week with Emily being out 3 days!"
     },
@@ -127,7 +127,7 @@
     "arrived": 2703,
     "nps": 158,
     "cancelRate": 16.18,
-    "goalTotal": 2520,
+    "goalTotal": 2542,
     "npGoal": 150
   },
   "importantInfo": [
