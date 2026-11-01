@@ -162,11 +162,6 @@
       "body": "Please pay attention to your tasks on Prompt! Jazmin is now using this feature to track PSFs / Auths. To find your tasks, go to Prompt and click the green check mark in the upper right hand corner. Click the chain link icon to see which patient the tasks is referring to. Once you've completed the task, click the pencil icon, remove yourself from the assignment list, and then save the task."
     },
     {
-      "id": "mswll48ubkznsul7udb",
-      "title": "**New F.I.T. Personal Appointment Types/Colors**",
-      "body": "Please include descriptions for Other/Personal Appointment Types/Blocks - we are phasing out the gray personal appt types!\n\nLunch Break -> Pink Block - Please include descriptions\nNP Access Blocks -> Green Block - Please include descriptions\nMonthly Check-in/Meeting/ Yearly Review -> Turquoise Block -Please include descriptions\nCE Block -> Yellow Block - Please include descriptions\nL10 Meeting -> Khaki Block - Please include descriptions"
-    },
-    {
       "id": "msclgs9nqe07zru5p1o",
       "title": "Process Change: NP Access Blocks",
       "body": "When scheduling New Patients in a NP Access Block, instead of sliding the existing NP Access Block to another timeslot, please create a new NP Access Block so we can better track the Fill Rate of these Access Blocks. If a NP Access Block does not get filled within 24 hours, you will still slide the Block to open up that timeslot to existing patients."
