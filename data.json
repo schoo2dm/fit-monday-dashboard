@@ -58,7 +58,7 @@
       "cancels": 79,
       "cancelRate": 16.42,
       "nps": 27,
-      "goal": 351,
+      "goal": 413,
       "npGoal": 18,
       "cdMessage": "Hope every one had a great Halloween! Solid week again! One off from our weekly visit record of 420! Keep doing all the little things to keep your schedules full: hold your patients accountable! Your time is very valuable! "
     },
@@ -127,7 +127,7 @@
     "arrived": 2889,
     "nps": 145,
     "cancelRate": 14.49,
-    "goalTotal": 2584,
+    "goalTotal": 2646,
     "npGoal": 175
   },
   "importantInfo": [
