@@ -78,7 +78,7 @@
       "cancels": 40,
       "cancelRate": 10.15,
       "nps": 19,
-      "goal": 304,
+      "goal": 333,
       "npGoal": null,
       "cdMessage": "We need to do a better job of keeping items picked up in the gym area. Take a minute and pick things up after your patient or during a session. Soon there will be a place for everything. \n\nFurniture should be here soon. I’ll notify when here and we can piece together in free time and schedule a pizza and beer time to finish everything. TBD. "
     },
@@ -127,7 +127,7 @@
     "arrived": 2922,
     "nps": 153,
     "cancelRate": 15.17,
-    "goalTotal": 2646,
+    "goalTotal": 2675,
     "npGoal": 175
   },
   "importantInfo": [
